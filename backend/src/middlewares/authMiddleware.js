@@ -12,6 +12,9 @@ const jwtVerification = asyncHandler(async (req, res, next) => {
       throw new ApiError(401, "No token provided");
     }
 
+    console.log("token :", token);
+    
+
     const decoded = jwt.verify(token, process.env.JWT_ACCESS_TOKEN_SECRET);
     req.user = {_id:decoded.id};
 

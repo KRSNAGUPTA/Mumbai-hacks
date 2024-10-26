@@ -5,13 +5,13 @@ const userSchema = new mongoose.Schema(
   {
     username: {
       type: String, 
-      required: true,
+      required: false,
       unique: true,
       minlength: 3,
     },
     fullName: {
       type: String,
-      required: true,
+      required: false,
       minlength: 3,
       maxlength: 100,
     },
@@ -26,6 +26,7 @@ const userSchema = new mongoose.Schema(
     },
     email: {
       type: String,
+      required:true,
       sparse: true, //allow null values
       unique: true,
       match: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,

@@ -51,9 +51,11 @@ router.post(
   ]),
   updateUserFiles
 );
-router.route("/user-details").get(jwtVerification,getUserDetails);
+router.route("/user-details").get(jwtVerification, getUserDetails);
 router.get("/get-cookie", (req, res) => {
-  res.send(`Cookie value: ${req.cookies.testCookie}`);
+  res.send(
+    `Cookie value: RefreshToken: ${req.cookies.refreshToken} AccessToken : ${req.cookies.accessToken}`
+  );
 });
 
 export default router;

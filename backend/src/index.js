@@ -4,6 +4,7 @@ import cookieParser from "cookie-parser";
 import cors from "cors";
 import { connectDB } from "./config/db.js";
 import userRoutes from "./routes/userRoutes.js";
+import caseRoutes from "./routes/caseRoutes.js";
 import { errorHandler } from "./middlewares/errorMiddleware.js";
 
 dotenv.config();
@@ -21,11 +22,12 @@ app.use(
 );
 app.use(express.json());
 
-app.get("/",(req,res)=>{
-  res.send("Working!")
-})
+app.get("/", (req, res) => {
+  res.send("Working!");
+});
 
 app.use("/api/v1/users", userRoutes);
+app.use("/api/v1/cases", caseRoutes );
 
 app.use(errorHandler);
 

@@ -38,16 +38,13 @@ const registerUser = asyncHandler(async (req, res) => {
   try {
     const { email, username, fullName, password } = req.body;
 
-    if (!email && !username) {
-      throw new ApiError(400, "Email or username required");
+    if (!email) {
+      throw new ApiError(400, "Email required");
     }
 
     // Check if user already exists
     let user = await User.findOne({
-      $or: [
-        { email: email.toLowerCase() },
-        { username: username.toLowerCase() },
-      ],
+      email: email.toLowerCase(),
     });
 
     if (user) {
@@ -231,7 +228,7 @@ const socialLogin = asyncHandler(async (req, res) => {
     if (existingUserByEmail) {
       if (existingUserByEmail.socialId !== socialId) {
         existingUserByEmail.socialId = socialId;
-        existingUserByEmail.avatar = avatar || existingUserByEmail.avatar; 
+        existingUserByEmail.avatar = avatar || existingUserByEmail.avatar;
         existingUserByEmail.lastLogin = Date.now();
         await existingUserByEmail.save();
 
@@ -273,7 +270,7 @@ const socialLogin = asyncHandler(async (req, res) => {
           );
       }
     }
-    
+
     const existingUserBySocialId = await User.findOne({ socialId });
 
     if (!existingUserBySocialId) {
